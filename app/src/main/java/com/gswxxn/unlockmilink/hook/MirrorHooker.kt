@@ -67,6 +67,23 @@ class MirrorHooker(private val deviceType : Int = 0) : YukiBaseHooker() {
                 }
             }
         }
+
+        "$packageName.settings.micloud.MiCloudUtils".hook {
+            injectMember {
+                method {
+                    name = "isSupportSubScreen"
+                    paramCount(1)
+                }
+                replaceToTrue()
+            }
+            injectMember {
+                method {
+                    name = "isSupportSubScreenOld"
+                    paramCount(1)
+                }
+                replaceToTrue()
+            }
+        }
     }
 
     fun onXPEvent(lpparam : XC_LoadPackage.LoadPackageParam) {
